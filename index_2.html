@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/main_2.css">
+    <title>SHOP</title>
+</head>
+<body>
+
+<header>
+
+    <div class="logo">
+        <a href="../index.html"><img id="logo" src="../assets/images/logo.webp" alt=""></a>
+        <a href="../index.html"><img id="logo_black" src="../assets/images/logo_black.webp" alt=""></a>
+
+    </div>
+
+    <input type="checkbox" id="burger-toggle" class="burger-checkbox">
+    <label for="burger-toggle" class="burger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+
+    
+    <label for="burger-toggle" class="overlay"></label>
+
+    <div class="navigation">
+        <a href="../index_4.html">
+            <p class="h">О нас</p>
+        </a>
+        <a href="../index_2.html">
+            <p class="h">Меню</p>
+        </a>
+        <a href="">
+            <p class="h">Отзывы</p>
+        </a>
+        <a href="../index_3.html">
+            <p class="h">Контакты</p>
+        </a>
+        <button class="black_tema" id="btn_theme">
+            <img id="luna" src="../assets/images/luna.webp" alt="">
+            <img id="sun" src="../assets/images/sun.webp" alt="">
+        </button>
+    </div>
+    <script>
+        const KEY = "thema"
+        const CLASS_DARK = "dark"
+
+        // const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+        const isDarkThema = localStorage.getItem(KEY);
+
+        if (isDarkThema === 'true') {
+            document.querySelector("body").classList.add(CLASS_DARK)
+        }
+
+        const btn = document.querySelector("#btn_theme");
+        btn.addEventListener('click', () => {
+            document.querySelector("body").classList.toggle(CLASS_DARK)
+            localStorage.setItem(KEY, document.querySelector("body").classList.contains(CLASS_DARK))
+        })
+    </script>
+
+</header>
+<div class="container">
+    <div class="onas_glav">
+    <div class="h1_onas">
+        Меню
+    </div>
+</div>
+</div>
+<div class="cat">
+        <div class="categor">
+        <p class="nazv">кофе</p>
+    </div>
+
+</div>
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Кофе</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="coffe-slider">
+            <div class="slider-wrapper">
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="cart_coffe">
+                            <img class="is" src="../assets/images/latte.webp" alt="Латте">
+                            <div class="text_coffe">
+                                <p class="h1">Латте</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart_coffe">
+                            <img src="../assets/images/capuchino.webp" alt="Капучино">
+                            <div class="text_coffe">
+                                <p class="h1">Капучино</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart_coffe">
+                            <img src="../assets/images/americano.webp" alt="Американо">
+                            <div class="text_coffe">
+                                <p class="h1">Американо</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart_coffe">
+                            <img src="../assets/images/matcha.webp" alt="Матча">
+                            <div class="text_coffe">
+                                <p class="h1">Матча</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-btn prev-btn">‹</button>
+                <button class="slider-btn next-btn">›</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Находим ВСЕ слайдеры на странице
+            const sliderElements = document.querySelectorAll('.coffe-slider');
+
+            sliderElements.forEach((sliderElement, index) => {
+                console.log(`Initializing slider ${index + 1}...`);
+
+                const track = sliderElement.querySelector('.slider-track');
+                const cards = sliderElement.querySelectorAll('.cart_coffe');
+                const prevBtn = sliderElement.querySelector('.prev-btn');
+                const nextBtn = sliderElement.querySelector('.next-btn');
+
+                if (!track || !prevBtn || !nextBtn) {
+                    console.error(`Slider ${index + 1} elements not found!`);
+                    return;
+                }
+
+                let currentPosition = 0;
+                const cardWidth = 376;
+                const gap = 35;
+                const visibleCards = 3;
+
+                function updateSlider() {
+                    track.style.transform = `translateX(${currentPosition}px)`;
+                }
+
+                function updateButtons() {
+                    const maxPosition = 0;
+                    const minPosition = -((cards.length - visibleCards) * (cardWidth + gap));
+
+                    prevBtn.disabled = currentPosition >= maxPosition;
+                    nextBtn.disabled = currentPosition <= minPosition;
+                }
+
+                function prev() {
+                    const maxPosition = 0;
+                    const minPosition = -((cards.length - visibleCards) * (cardWidth + gap));
+
+                    currentPosition += (cardWidth + gap);
+                    if (currentPosition > maxPosition) {
+                        currentPosition = maxPosition;
+                    }
+
+                    updateSlider();
+                    updateButtons();
+                }
+
+                function next() {
+                    const maxPosition = 0;
+                    const minPosition = -((cards.length - visibleCards) * (cardWidth + gap));
+
+                    currentPosition -= (cardWidth + gap);
+                    if (currentPosition < minPosition) {
+                        currentPosition = minPosition;
+                    }
+
+                    updateSlider();
+                    updateButtons();
+                }
+
+                prevBtn.addEventListener('click', prev);
+                nextBtn.addEventListener('click', next);
+
+                updateButtons();
+                console.log(`Slider ${index + 1} initialized successfully!`);
+            });
+        });
+    </script>
+</body>
+
+</html>
+<div class="cat">
+        <div class="categor">
+        <p class="nazv">выпечка</p>
+    </div>
+
+</div>
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Кофе</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="coffe-slider">
+            <div class="slider-wrapper">
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="cart_coffe">
+                            <img class="is" src="../assets/images/crousan.webp" alt="Латте">
+                            <div class="text_coffe">
+                                <p class="h1">Круасан</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart_coffe">
+                            <img src="../assets/images/sinabon.webp" alt="Капучино">
+                            <div class="text_coffe">
+                                <p class="h1">Синабон</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart_coffe">
+                            <img src="../assets/images/donat.webp" alt="Американо">
+                            <div class="text_coffe">
+                                <p class="h1">Пончик</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart_coffe">
+                            <img src="../assets/images/cookies.webp" alt="Матча">
+                            <div class="text_coffe">
+                                <p class="h1">Печенье</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-btn prev-btn">‹</button>
+                <button class="slider-btn next-btn">›</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Находим ВСЕ слайдеры на странице
+            const sliderElements = document.querySelectorAll('.coffe-slider');
+
+            sliderElements.forEach((sliderElement, index) => {
+                console.log(`Initializing slider ${index + 1}...`);
+
+                const track = sliderElement.querySelector('.slider-track');
+                const cards = sliderElement.querySelectorAll('.cart_coffe');
+                const prevBtn = sliderElement.querySelector('.prev-btn');
+                const nextBtn = sliderElement.querySelector('.next-btn');
+
+                if (!track || !prevBtn || !nextBtn) {
+                    console.error(`Slider ${index + 1} elements not found!`);
+                    return;
+                }
+
+                let currentPosition = 0;
+                const cardWidth = 376;
+                const gap = 35;
+                const visibleCards = 3;
+
+                function updateSlider() {
+                    track.style.transform = `translateX(${currentPosition}px)`;
+                }
+
+                function updateButtons() {
+                    const maxPosition = 0;
+                    const minPosition = -((cards.length - visibleCards) * (cardWidth + gap));
+
+                    prevBtn.disabled = currentPosition >= maxPosition;
+                    nextBtn.disabled = currentPosition <= minPosition;
+                }
+
+                function prev() {
+                    const maxPosition = 0;
+                    const minPosition = -((cards.length - visibleCards) * (cardWidth + gap));
+
+                    currentPosition += (cardWidth + gap);
+                    if (currentPosition > maxPosition) {
+                        currentPosition = maxPosition;
+                    }
+
+                    updateSlider();
+                    updateButtons();
+                }
+
+                function next() {
+                    const maxPosition = 0;
+                    const minPosition = -((cards.length - visibleCards) * (cardWidth + gap));
+
+                    currentPosition -= (cardWidth + gap);
+                    if (currentPosition < minPosition) {
+                        currentPosition = minPosition;
+                    }
+
+                    updateSlider();
+                    updateButtons();
+                }
+
+                prevBtn.addEventListener('click', prev);
+                nextBtn.addEventListener('click', next);
+
+                updateButtons();
+                console.log(`Slider ${index + 1} initialized successfully!`);
+            });
+        });
+    </script>
+</body>
+
+</html>
+<div class="cat">
+        <div class="categor">
+        <p class="nazv">Десерты</p>
+    </div>
+
+</div>
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Кофе</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="coffe-slider">
+            <div class="slider-wrapper">
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="cart_coffe">
+                            <img class="is" src="../assets/images/ecler.webp" alt="Латте">
+                            <div class="text_coffe">
+                                <p class="h1">Эклер</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart_coffe">
+                            <img src="../assets/images/chizkek.webp" alt="Капучино">
+                            <div class="text_coffe">
+                                <p class="h1">Чизкейк</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart_coffe">
+                            <img src="../assets/images/medovik.webp" alt="Американо">
+                            <div class="text_coffe">
+                                <p class="h1">Медовик</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart_coffe">
+                            <img src="../assets/images/tiramus.webp" alt="Матча">
+                            <div class="text_coffe">
+                                <p class="h1">Тирамису</p>
+                                <div class="price">
+                                    <p class="ot">от</p>
+                                    <p class="pri">259 </p>
+                                    <p class="val">руб.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-btn prev-btn">‹</button>
+                <button class="slider-btn next-btn">›</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Находим ВСЕ слайдеры на странице
+            const sliderElements = document.querySelectorAll('.coffe-slider');
+
+            sliderElements.forEach((sliderElement, index) => {
+                console.log(`Initializing slider ${index + 1}...`);
+
+                const track = sliderElement.querySelector('.slider-track');
+                const cards = sliderElement.querySelectorAll('.cart_coffe');
+                const prevBtn = sliderElement.querySelector('.prev-btn');
+                const nextBtn = sliderElement.querySelector('.next-btn');
+
+                if (!track || !prevBtn || !nextBtn) {
+                    console.error(`Slider ${index + 1} elements not found!`);
+                    return;
+                }
+
+                let currentPosition = 0;
+                const cardWidth = 376;
+                const gap = 35;
+                const visibleCards = 3;
+
+                function updateSlider() {
+                    track.style.transform = `translateX(${currentPosition}px)`;
+                }
+
+                function updateButtons() {
+                    const maxPosition = 0;
+                    const minPosition = -((cards.length - visibleCards) * (cardWidth + gap));
+
+                    prevBtn.disabled = currentPosition >= maxPosition;
+                    nextBtn.disabled = currentPosition <= minPosition;
+                }
+
+                function prev() {
+                    const maxPosition = 0;
+                    const minPosition = -((cards.length - visibleCards) * (cardWidth + gap));
+
+                    currentPosition += (cardWidth + gap);
+                    if (currentPosition > maxPosition) {
+                        currentPosition = maxPosition;
+                    }
+
+                    updateSlider();
+                    updateButtons();
+                }
+
+                function next() {
+                    const maxPosition = 0;
+                    const minPosition = -((cards.length - visibleCards) * (cardWidth + gap));
+
+                    currentPosition -= (cardWidth + gap);
+                    if (currentPosition < minPosition) {
+                        currentPosition = minPosition;
+                    }
+
+                    updateSlider();
+                    updateButtons();
+                }
+
+                prevBtn.addEventListener('click', prev);
+                nextBtn.addEventListener('click', next);
+
+                updateButtons();
+                console.log(`Slider ${index + 1} initialized successfully!`);
+            });
+        });
+    </script>
+</body>
+
+</html>
+<footer>
+    <div class="container">
+        <div class="foot">
+            <div class="right_coloumn">
+                <div class="one_column">
+                    <p class="p">Компания</p>
+                    <a href="../index_4.html">
+                        <p class="p">О нас</p>
+                    </a>
+                    <p class="p">Отзывы</p>
+                    <a href="../index_3.html">
+                        <p class="p">Контакты</p>
+                    </a>
+                </div>
+                <div class="one_column">
+                    <a href="../index_2.html" class="p">
+                        <p>Меню</p>
+                    </a>
+                    <a href="../index_2.html" class="p">
+                        <p>Кофе</p>
+                    </a>
+                    <a href="../index_2.html" class="p">
+                        <p>Выпечка</p>
+                    </a>
+                    <a href="../index_2.html" class="p">
+                        <p>Десерты</p>
+                    </a>
+                </div>
+            </div>
+            <div class="left_coloumn">
+                <div class="phone_email">
+                    <div class="phone">
+                        <p class="number_phone">+7 (800) 555-32-89</p>
+                        <p class="description">для звонков из России и других стран</p>
+                    </div>
+                    <div class="email">
+                        <p>arl@coffee.com</p>
+                    </div>
+                    <div class="soc_setu">
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_102_412)">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 30C23.2842 30 30 23.2842 30 15C30 6.7158 23.2842 0 15 0C6.7158 0 0 6.7158 0 15C0 23.2842 6.7158 30 15 30ZM21.5931 9.5832C21.7089 8.2692 20.3211 8.8104 20.3211 8.8104C19.2966 9.2346 18.24 9.6654 17.172 10.101C13.86 11.4519 10.4388 12.8475 7.5243 14.2212C5.9439 14.8008 6.8691 15.3804 6.8691 15.3804L9.3744 16.1535C10.5309 16.5015 11.1474 16.1148 11.1474 16.1148L16.5438 12.4434C18.471 11.1294 18.0084 12.2115 17.5458 12.6753L13.4988 16.5399C12.882 17.0811 13.1904 17.5449 13.4601 17.7768C14.2251 18.4515 16.1061 19.686 16.9272 20.2248C17.1408 20.3649 17.2827 20.4582 17.3148 20.4822C17.5074 20.6367 18.5481 21.3324 19.242 21.1779C19.9359 21.0231 20.013 20.1342 20.013 20.1342L20.9379 14.0664C21.0765 13.0131 21.2358 12.0006 21.363 11.1918C21.483 10.428 21.5745 9.8463 21.5931 9.5832Z" fill="var(--milk_ser)"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_102_412">
+                                    <rect width="30" height="30" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_102_413)">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71574 23.2843 0 15 0C6.71574 0 0 6.71574 0 15C0 23.2843 6.71574 30 15 30ZM20.9288 8.69784C19.3852 7.1523 17.3322 6.30081 15.145 6.3C10.6385 6.3 6.97038 9.96756 6.96876 14.4757C6.96822 15.9167 7.34469 17.3234 8.06004 18.5631L6.9 22.8L11.2343 21.6632C12.4285 22.3147 13.7732 22.6579 15.1414 22.6584H15.1447C19.6509 22.6584 23.319 18.9903 23.3209 14.4825C23.3222 12.2975 22.4727 10.2434 20.9288 8.69784ZM18.8726 16.1876C18.6682 16.0853 17.664 15.5912 17.4765 15.5231C17.2894 15.4548 17.153 15.4207 17.0168 15.6253C16.8807 15.83 16.4892 16.2899 16.37 16.4264C16.2508 16.5628 16.1315 16.5797 15.9275 16.4774C15.8941 16.4606 15.8485 16.4409 15.7923 16.4165C15.5046 16.2917 14.9372 16.0457 14.2845 15.4633C13.6772 14.9215 13.2672 14.2525 13.148 14.0482C13.0287 13.8436 13.1351 13.7331 13.2374 13.6313C13.2988 13.5701 13.3692 13.4843 13.4396 13.3986C13.4747 13.3558 13.5098 13.313 13.5438 13.2734C13.6304 13.1723 13.668 13.0955 13.7191 12.9915C13.7282 12.9728 13.7378 12.9533 13.7482 12.9326C13.8164 12.7962 13.7823 12.677 13.7312 12.5747C13.6972 12.5063 13.5035 12.035 13.328 11.6077C13.2407 11.3952 13.1578 11.1936 13.1013 11.0578C12.9548 10.7061 12.8065 10.707 12.6874 10.7077C12.6716 10.7078 12.6563 10.7079 12.6416 10.7072C12.5226 10.7012 12.3862 10.7001 12.2501 10.7001C12.1139 10.7001 11.8927 10.7511 11.7053 10.9557C11.6932 10.9689 11.6797 10.9833 11.665 10.999C11.4521 11.2263 10.9902 11.7194 10.9902 12.6601C10.9902 13.6632 11.7186 14.6324 11.8237 14.7723L11.8245 14.7733C11.8311 14.7822 11.843 14.7993 11.86 14.8236C12.1039 15.1735 13.3984 17.0307 15.3144 17.8581C15.802 18.0687 16.1823 18.1943 16.4791 18.2884C16.9685 18.4439 17.4138 18.422 17.766 18.3694C18.1586 18.3107 18.9746 17.8753 19.1448 17.3981C19.3151 16.921 19.3151 16.5118 19.2641 16.4266C19.2229 16.3577 19.1264 16.311 18.9833 16.2418C18.949 16.2253 18.912 16.2074 18.8726 16.1876Z" fill="var(--milk_ser)"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_102_413">
+                                    <rect width="30" height="30" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="30" height="30" rx="15" fill="var(--milk_ser)"/>
+                            <path d="M23.2984 9.75369C22.6487 8.98132 21.4491 8.66626 19.1581 8.66626H10.8418C8.49834 8.66626 7.27841 9.00164 6.6311 9.82395C6 10.6257 6 11.807 6 13.442V16.5583C6 19.7257 6.7488 21.334 10.8418 21.334H19.1581C21.1449 21.334 22.2458 21.056 22.958 20.3743C23.6884 19.6754 24 18.5341 24 16.5583V13.442C24 11.7178 23.9512 10.5295 23.2984 9.75369ZM17.5561 15.4304L13.7797 17.404C13.6952 17.4482 13.6029 17.4701 13.5107 17.4701C13.4063 17.4701 13.3021 17.442 13.2099 17.3861C13.0361 17.2808 12.9301 17.0925 12.9301 16.8894V12.9547C12.9301 12.752 13.0359 12.5638 13.2092 12.4585C13.3827 12.3532 13.5984 12.346 13.7783 12.4395L17.5547 14.4004C17.7469 14.5002 17.8675 14.6985 17.8678 14.9149C17.868 15.1315 17.7479 15.3302 17.5561 15.4304Z" fill="var(--green)"/>
+                        </svg>
+
+                    </div>
+                    <div class="information">
+                        <p>Общество с ограниченной ответственностью "Арль" (ООО "Арль") 426004, Россия, Нижегородская
+                            обл., город Нижний Новгород, Гордеевская ул., д. 5, офис 223</p>
+                        <div class="in_small">
+                            <p>ИНН - 1832114280 </p>
+                            <p>ОГРН – 1131832006778</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
